@@ -5,7 +5,9 @@ using UnityEngine;
 public class AstMove : MonoBehaviour
 {
     public Animator animator;
-    public float Walkspeed = 5;
+    public float WalkSpeed = 5, JumpForce= 30;
+    public Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,8 @@ public class AstMove : MonoBehaviour
     void AnimationReset(string animationName)
     {
         animator.SetBool("Walk", false);
+        //animator.SetBool("RightRun", false);
+        //animator.SetBool("LeftRun", false);
         animator.SetBool("Idle", false);
         animator.SetBool(animationName, true);
     }
@@ -25,19 +29,20 @@ public class AstMove : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             AnimationReset("Walk");
-            transform.Translate(Vector3.left*Time.deltaTime*Walkspeed);
+            transform.Translate(Vector3.left*Time.deltaTime*WalkSpeed);
             
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
             AnimationReset("Walk");
-            transform.Translate(Vector3.right * Time.deltaTime * Walkspeed);
+            transform.Translate(Vector3.right * Time.deltaTime * WalkSpeed);
            
         }
         //bi kere çalışsın diye.
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             animator.SetTrigger("Jump");
+            rb.AddForce(Vector2.up * JumpForce);
         }
         else if(Input.anyKey == false)
         {
