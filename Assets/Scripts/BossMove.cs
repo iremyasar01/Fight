@@ -7,6 +7,7 @@ public class BossMove : MonoBehaviour
 {
     public Animator animator;
     public float RunSpeed = 5;
+    public GameObject Fire;
 
     void AnimationBoss(string animationName)
     {
@@ -41,11 +42,26 @@ public class BossMove : MonoBehaviour
             //animator.SetTrigger("Jump");
         }
         */
+        //arka arkaya basıldığında bir kere çalışsın diye
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetTrigger("RAttack");
+            Invoke(nameof(Attack), 0.5f);
+            //0.5 saniye beklesin.
+        }
         
         else if (Input.anyKey == false)
         {
             AnimationBoss("Idle");
         }
-
+      
     }
+   void Attack()
+    {
+      
+        GameObject newFire = Instantiate(Fire, transform.position, Quaternion.identity);
+        //oluşan fire'ım karakterin üzerinde oluşsun ve rotaionu 0 0 olsun.
+        newFire.SetActive(true);
+    }
+
 }
