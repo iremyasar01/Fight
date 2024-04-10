@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 
 public class BossMove : MonoBehaviour
 {
     public Animator animator;
     public float RunSpeed = 5;
     public GameObject Fire;
+    public int Health = 100;
+    public Slider HealthBar;
 
     void AnimationBoss(string animationName)
     {
@@ -20,6 +23,7 @@ public class BossMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        HealthBar.value = Health;
         //bastığım sürece çalışsın basılı kaldığımda
         if (Input.GetKey(KeyCode.D))
         {
